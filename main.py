@@ -12,7 +12,7 @@ def create_table():
 def insert_data(name, age):
     connection = sqlite3.connect('test.db')
     cursor = connection.cursor()
-    cursor.execute('INSERT INTO users (name, age) VALUES (?, ?)', ("Jess", 30))
+    cursor.execute('INSERT INTO users (name, age) VALUES (?, ?)', (name, age))
     connection.commit()
     connection.close()
 
