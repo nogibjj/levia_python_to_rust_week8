@@ -31,9 +31,9 @@ if __name__ == '__main__':
     insert_data("Alice", 30)
 
     # Read data
-    data = read_data()
+    user_data = read_data()
     print("All Users:")
-    for user in data:
+    for user in user_data:
         print(user)
 
     # Execute custom queries
