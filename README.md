@@ -1,14 +1,23 @@
-# Python_Template
+# Python_SQL
 
 Welcome to my project! This repository contains all the code and resources related to my awesome project.
 
-## Table of Contents
+## Requirements
+- Connect to a SQL database
+- Perform CRUD operations
+- Write at least two different SQL queries
 
-- MakeFile
-- .devcontainer
-- requirements.txt
-- cicd.yml
-- 
+## Grading Criteria
+- Database connection (20 points)
+- CRUD operations (20 points)
+
+## Deliverables
+- Python script
+- Screenshot or log of successful database operations
+
+
+-------
+
 
 ## MakeFile
 
