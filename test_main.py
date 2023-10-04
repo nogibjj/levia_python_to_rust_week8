@@ -1,4 +1,5 @@
 import main  # Import the main module
+import sqlite3
 
 def test_create_table():
     main.create_table()
