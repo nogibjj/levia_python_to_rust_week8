@@ -1,24 +1,33 @@
-import main
-import pytest
+import main  # Import the main module
 
-@pytest.fixture
-def setup_database():
+def test_create_table():
     main.create_table()
-    yield
-    connection = main.sqlite3.connect('test.db')
-    cursor = connection.cursor()
-    cursor.execute('DROP TABLE users')
-    connection.commit()
-    connection.close()
 
-def test_insert_data(setup_database):
+def test_insert_data():
+    main.insert_data("John", 25)
     main.insert_data("Alice", 30)
 
-def test_read_data(setup_database):
-    data = main.read_data()
-    # You can add assertions here to validate the data if needed
+def test_read_data():
+    user_data = main.read_data()
+    print("All Users:")
+    for user in user_data:
+        print(user)
 
-def test_custom_query(setup_database):
-    query = "SELECT name FROM users WHERE age > 25"
-    result = main.custom_query(query)
-    # You can add assertions here to validate the result if needed
+def test_custom_queries():
+    custom_connection = sqlite3.connect('test.db')
+    custom_cursor = custom_connection.cursor()
+    query1 = "SELECT name FROM users WHERE age > 25"
+    query2 = "SELECT AVG(age) FROM users"
+    
+    result1 = custom_cursor.execute(query1).fetchall()
+    result2 = custom_cursor.execute(query2).fetchall()
+
+    custom_connection.close()
+
+    print("\nUsers older than 25:")
+    for user in result1:
+        print(user[0])
+
+    print("\nAverage age of all users:")
+    for avg_age in result2:
+        print(avg_age[0])
