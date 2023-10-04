@@ -17,11 +17,6 @@ Welcome to my project! This repository contains all the code and resources relat
   <img width="355" alt="Screenshot 2023-10-04 at 12 07 12 AM" src="https://github.com/nogibjj/levia_sql_connection_week5/assets/73449544/27005c8c-cf2d-4805-9f82-5d2fc324fd41">
 
 
-## Deliverables
-- Python script
-- Screenshot or log of successful database operations
-
-
 -------
 
 
