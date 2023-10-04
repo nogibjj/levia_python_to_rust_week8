@@ -5,7 +5,7 @@ install:
 lint:
 	pylint --disable=R,C --ignore-patterns=test_.*?py *.py
 
-format:	f
+format:	
 	black *.py 
 
 test:
