@@ -37,15 +37,15 @@ if __name__ == '__main__':
         print(user)
 
     # Execute custom queries
-    connection = sqlite3.connect('test.db')
-    cursor = connection.cursor()
+    custom_connection = sqlite3.connect('test.db')
+    custom_cursor = custom_connection.cursor()
     query1 = "SELECT name FROM users WHERE age > 25"
     query2 = "SELECT AVG(age) FROM users"
     
-    result1 = cursor.execute(query1).fetchall()
-    result2 = cursor.execute(query2).fetchall()
+    result1 = custom_cursor.execute(query1).fetchall()
+    result2 = custom_cursor.execute(query2).fetchall()
 
-    connection.close()
+    custom_connection.close()
 
     print("\nUsers older than 25:")
     for user in result1:
