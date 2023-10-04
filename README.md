@@ -4,12 +4,18 @@ Welcome to my project! This repository contains all the code and resources relat
 
 ## Requirements
 - Connect to a SQL database
+  <img width="372" alt="Screenshot 2023-10-04 at 12 06 28 AM" src="https://github.com/nogibjj/levia_sql_connection_week5/assets/73449544/2a294fe6-4b84-46a3-84af-e37427528a16">
 - Perform CRUD operations
+  <img width="799" alt="Screenshot 2023-10-04 at 12 06 53 AM" src="https://github.com/nogibjj/levia_sql_connection_week5/assets/73449544/bf6af810-056f-4d9b-a303-c76bb1c03963">
 - Write at least two different SQL queries
+  <img width="367" alt="Screenshot 2023-10-04 at 12 05 51 AM" src="https://github.com/nogibjj/levia_sql_connection_week5/assets/73449544/8f808d90-02ec-48ab-88a6-4a3f50fa1c2f">
+
 
 ## Grading Criteria
 - Database connection (20 points)
 - CRUD operations (20 points)
+  <img width="355" alt="Screenshot 2023-10-04 at 12 07 12 AM" src="https://github.com/nogibjj/levia_sql_connection_week5/assets/73449544/27005c8c-cf2d-4805-9f82-5d2fc324fd41">
+
 
 ## Deliverables
 - Python script
