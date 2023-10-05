@@ -1,41 +1,58 @@
-# Python_SQL
+# SQLite Database Operations
 
-Welcome to my project! This repository contains all the code and resources related to my awesome project.
+This Python script demonstrates basic database operations using SQLite. SQLite is a lightweight and self-contained database engine, and this script shows you how to create a database, create a table, insert data, read data, and execute custom SQL queries.
 
-## Requirements
-- Connect to a SQL database
-  <img width="372" alt="Screenshot 2023-10-04 at 12 06 28 AM" src="https://github.com/nogibjj/levia_sql_connection_week5/assets/73449544/2a294fe6-4b84-46a3-84af-e37427528a16">
-- Perform CRUD operations
-  <img width="799" alt="Screenshot 2023-10-04 at 12 06 53 AM" src="https://github.com/nogibjj/levia_sql_connection_week5/assets/73449544/bf6af810-056f-4d9b-a303-c76bb1c03963">
-- Write at least two different SQL queries
-  <img width="367" alt="Screenshot 2023-10-04 at 12 05 51 AM" src="https://github.com/nogibjj/levia_sql_connection_week5/assets/73449544/8f808d90-02ec-48ab-88a6-4a3f50fa1c2f">
+## Code Explanation
 
+### Database Creation
 
-## Grading Criteria
-- Database connection (20 points)
-- CRUD operations (20 points)
+Create a SQLite database named `test.db`. 
+
+```python
+create_table()
+```
+
+This function creates a table named `users` with columns `id` (integer, primary key), `name` (text), and `age` (integer).
+
+### Inserting Data
+
+Insert data into the `users` table using the `insert_data` function. You can insert additional data by calling this function with the desired `name` and `age` values.
+
+```python
+insert_data("John", 25)
+insert_data("Alice", 30)
+```
+
+### Reading Data
+
+To retrieve data from the `users` table, the `read_data` function is used. This function fetches all rows from the table and returns them as a list of tuples.
+
+```python
+user_data = read_data()
+```
+
+### Custom Queries
+
+1. Select names of users older than 25:
+
+```python
+query1 = "SELECT name FROM users WHERE age > 25"
+```
+
+2. Calculate the average age of all users:
+
+```python
+query2 = "SELECT AVG(age) FROM users"
+```
+
+These queries are executed using a custom connection and cursor, and the results are printed to the console.
+
+```python
+result1 = custom_cursor.execute(query1).fetchall()
+result2 = custom_cursor.execute(query2).fetchall()
+```
+
+## Execution
+
   <img width="355" alt="Screenshot 2023-10-04 at 12 07 12 AM" src="https://github.com/nogibjj/levia_sql_connection_week5/assets/73449544/27005c8c-cf2d-4805-9f82-5d2fc324fd41">
-
-
--------
-
-
-## MakeFile
-
-The `MakeFile` in this repository is a configuration file used with the `make` command. It defines a set of rules and instructions for building and managing the project. It can be used to automate common tasks such as compiling code, running tests, and more. Be sure to consult the MakeFile for specific commands and targets available for this project.
-
-## .devcontainer
-
-The `.devcontainer` directory contains configuration files for setting up a development container environment. This is particularly useful for ensuring that your project can be developed consistently across different platforms and development environments. It may include configuration for Docker containers, development extensions, and other development environment settings. Consult the files in this directory for more details on the development environment setup.
-
-## requirements.txt
-
-The `requirements.txt` file lists all the dependencies and packages required to run this project. You can use this file with package management tools like `pip` (for Python) or other package managers to install the necessary libraries and dependencies. It's a good practice to keep this file up-to-date as your project evolves, making it easier for others to set up and run your project with the correct dependencies.
-
-## cicd.yml
-The cicd.yml file is a configuration file for Continuous Integration/Continuous Deployment (CI/CD) pipelines. It defines the steps and actions that need to be taken when code changes are pushed to the repository. CI/CD pipelines automate the build, test, and deployment processes, ensuring code quality and reliability.
-
-## License
-
-MIT
 
