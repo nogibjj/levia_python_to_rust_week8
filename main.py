@@ -84,6 +84,8 @@ if __name__ == '__main__':
     for row in results[0]:
         print(row)
 
+    print('  -----   ')
+
     print("\nComplex Query 2: Users with average order amount over 100:")
     for row in results[1]:
         print(row)
