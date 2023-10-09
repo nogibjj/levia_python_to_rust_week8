@@ -12,47 +12,41 @@ Create a SQLite database named `test.db`.
 create_table()
 ```
 
-This function creates a table named `users` with columns `id` (integer, primary key), `name` (text), and `age` (integer).
+## Joining Tables
 
-### Inserting Data
-
-Insert data into the `users` table using the `insert_data` function. You can insert additional data by calling this function with the desired `name` and `age` values.
-
-```python
-insert_data("John", 25)
-insert_data("Alice", 30)
+```sql
+SELECT u.name, o.order_date
+FROM users u
+INNER JOIN orders o ON u.id = o.user_id
+WHERE u.age > 25
+ORDER BY o.order_date DESC;
 ```
 
-### Reading Data
+**Explanation:**
 
-To retrieve data from the `users` table, the `read_data` function is used. This function fetches all rows from the table and returns them as a list of tuples.
+- This query retrieves data from two tables: `users` (aliased as `u`) and `orders` (aliased as `o`).
+- It performs an inner join between the two tables based on the `user_id` in the `orders` table matching the `id` in the `users` table.
+- The `WHERE` clause filters the results to include only users with an age greater than 25.
+- Finally, the `ORDER BY` clause sorts the results by the `order_date` column in descending order.
 
-```python
-user_data = read_data()
+
+## Complex SQL Query Example 2: Aggregation
+
+```sql
+SELECT u.name, AVG(o.total_amount) AS avg_order_amount
+FROM users u
+INNER JOIN orders o ON u.id = o.user_id
+GROUP BY u.name
+HAVING AVG(o.total_amount) > 100;
 ```
 
-### Custom Queries
+**Explanation:**
 
-1. Select names of users older than 25:
+- This query also retrieves data from the `users` and `orders` tables, performing an inner join.
+- It uses the `GROUP BY` clause to group the results by the user's name (`u.name`).
+- Within each group, it calculates the average (`AVG`) of the `total_amount` column from the `orders` table and aliases it as `avg_order_amount`.
+- The `HAVING` clause filters the groups to include only those where the average order amount is greater than 100.
 
-```python
-query1 = "SELECT name FROM users WHERE age > 25"
-```
-
-2. Calculate the average age of all users:
-
-```python
-query2 = "SELECT AVG(age) FROM users"
-```
-
-These queries are executed using a custom connection and cursor, and the results are printed to the console.
-
-```python
-result1 = custom_cursor.execute(query1).fetchall()
-result2 = custom_cursor.execute(query2).fetchall()
-```
 
 ## Execution
-
-  <img width="355" alt="Screenshot 2023-10-04 at 12 07 12 AM" src="https://github.com/nogibjj/levia_sql_connection_week5/assets/73449544/27005c8c-cf2d-4805-9f82-5d2fc324fd41">
 
