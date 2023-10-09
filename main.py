@@ -15,6 +15,13 @@ def insert_data(name, age, db_name='test.db'):
     connection.commit()
     connection.close()
 
+def insert_order(user_id, order_date, total_amount, db_name='test.db'):
+    connection = sqlite3.connect(db_name)
+    cursor = connection.cursor()
+    cursor.execute("INSERT INTO orders (user_id, order_date, total_amount) VALUES (?, ?, ?)", (user_id, order_date, total_amount))
+    connection.commit()
+    connection.close()
+
 def read_data(db_name='test.db'):
     connection = sqlite3.connect(db_name)
     cursor = connection.cursor()
