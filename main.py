@@ -60,12 +60,6 @@ if __name__ == '__main__':
     insert_data("Ana", 35)
     insert_data("Jake", 28)
 
-    # Insert orders for users
-    insert_order(1, '2023-01-15', 150)
-    insert_order(2, '2023-01-20', 80)
-    insert_order(3, '2023-02-05', 120)
-    insert_order(4, '2023-02-10', 90)
-    insert_order(5, '2023-02-15', 200)
 
     # Read data
     user_data = read_data()
