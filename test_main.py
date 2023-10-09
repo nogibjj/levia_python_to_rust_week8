@@ -1,4 +1,4 @@
-from main import   complex_query
+import main
 import sqlite3
 
 def test_create_table():
@@ -14,7 +14,7 @@ def test_read_data():
     for user in user_data:
         print(user)
 def test_complex_query():
-        results = complex_query(test.db)
+        results = main.complex_query(test.db)
 
 
         
