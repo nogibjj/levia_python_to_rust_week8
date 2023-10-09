@@ -13,9 +13,8 @@ def test_read_data():
     print("All Users:")
     for user in user_data:
         print(user)
-def test_complex_query():
-        results = main.complex_query(test.db)
-
+def test_complex_query(test_db):
+    result1, result2 = main.complex_query(test_db)
 
         
 
