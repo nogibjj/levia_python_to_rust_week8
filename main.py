@@ -88,4 +88,4 @@ if __name__ == '__main__':
     for row in results[1]:
         print(row)
         
-    custom_connection.close()
+   # custom_connection.close()
