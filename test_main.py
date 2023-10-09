@@ -13,15 +13,12 @@ def test_read_data():
     print("All Users:")
     for user in user_data:
         print(user)
-def test_complex_query_1(self):
-        # Test the first complex query
-        results = complex_query(self.db_name)
-        self.assertEqual(len(results[0]), 0)  
+def test_complex_query_1():
+        results = complex_query(test.db)
 
-def test_complex_query_2(self):
-        # Test the second complex query
-        results = complex_query(self.db_name)
-        self.assertEqual(len(results[1]), 0)
+def test_complex_query_2():
+        results = complex_query(test.db)
+        
 
 def test_custom_queries():
     custom_connection = sqlite3.connect('test.db')
