@@ -22,13 +22,50 @@ def read_data(db_name='test.db'):
     connection.close()
     return data
 
+def complex_query(db_name='test.db'):
+    connection = sqlite3.connect(db_name)
+    cursor = connection.cursor()
+
+    # Joining tables
+    query1 = """
+    SELECT u.name, o.order_date
+    FROM users u
+    INNER JOIN orders o ON u.id = o.user_id
+    WHERE u.age > 25
+    ORDER BY o.order_date DESC;
+    """
+    result1 = cursor.execute(query1).fetchall()
+
+    # Aggregation
+    query2 = """
+    SELECT u.name, AVG(o.total_amount) AS avg_order_amount
+    FROM users u
+    INNER JOIN orders o ON u.id = o.user_id
+    GROUP BY u.name
+    HAVING AVG(o.total_amount) > 100;
+    """
+    result2 = cursor.execute(query2).fetchall()
+
+    connection.close()
+    return result1, result2
+
 if __name__ == '__main__':
     # Create the table
     create_table()
 
-    # Insert some data
+    # Insert data
     insert_data("John", 25)
     insert_data("Alice", 30)
+    insert_data("Bob", 22)
+    insert_data("Ana", 35)
+    insert_data("Jake", 28)
+
+    # Insert orders for users
+    insert_order(1, '2023-01-15', 150)
+    insert_order(2, '2023-01-20', 80)
+    insert_order(3, '2023-02-05', 120)
+    insert_order(4, '2023-02-10', 90)
+    insert_order(5, '2023-02-15', 200)
 
     # Read data
     user_data = read_data()
@@ -36,21 +73,25 @@ if __name__ == '__main__':
     for user in user_data:
         print(user)
 
-    # Execute custom queries
-    custom_connection = sqlite3.connect('test.db')
-    custom_cursor = custom_connection.cursor()
-    query1 = "SELECT name FROM users WHERE age > 25"
-    query2 = "SELECT AVG(age) FROM users"
+    # # Execute custom queries
+    # custom_connection = sqlite3.connect('test.db')
+    # custom_cursor = custom_connection.cursor()
+    # query1 = "SELECT name FROM users WHERE age > 25"
+    # query2 = "SELECT AVG(age) FROM users"
     
-    result1 = custom_cursor.execute(query1).fetchall()
-    result2 = custom_cursor.execute(query2).fetchall()
+    # result1 = custom_cursor.execute(query1).fetchall()
+    # result2 = custom_cursor.execute(query2).fetchall()
 
+
+    # Execute complex queries
+    results = complex_query()
+    
+    print("\nComplex Query 1: Users older than 25 with their recent orders:")
+    for row in results[0]:
+        print(row)
+
+    print("\nComplex Query 2: Users with average order amount over 100:")
+    for row in results[1]:
+        print(row)
+        
     custom_connection.close()
-
-    print("\nUsers older than 25:")
-    for user in result1:
-        print(user[0])
-
-    print("\nAverage age of all users:")
-    for avg_age in result2:
-        print(avg_age[0])
