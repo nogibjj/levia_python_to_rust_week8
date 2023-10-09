@@ -4,6 +4,7 @@ def create_table(db_name='test.db'):
     connection = sqlite3.connect(db_name)
     cursor = connection.cursor()
     cursor.execute("""CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT, age INTEGER)""")
+    cursor.execute("""CREATE TABLE IF NOT EXISTS orders (id INTEGER PRIMARY KEY,user_id INTEGER,order_date DATE,total_amount REAL)""")
     connection.commit()
     connection.close()
 
@@ -59,6 +60,13 @@ if __name__ == '__main__':
     insert_data("Bob", 22)
     insert_data("Ana", 35)
     insert_data("Jake", 28)
+
+    # Insert order data
+    insert_order(1, '2023-01-15', 150)
+    insert_order(2, '2023-01-20', 80)
+    insert_order(3, '2023-02-05', 120)
+    insert_order(4, '2023-02-10', 90)
+    insert_order(5, '2023-02-15', 200)
 
 
     # Read data
