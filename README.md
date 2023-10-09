@@ -29,6 +29,8 @@ ORDER BY o.order_date DESC;
 - The `WHERE` clause filters the results to include only users with an age greater than 25.
 - Finally, the `ORDER BY` clause sorts the results by the `order_date` column in descending order.
 
+**Results:**
+- The result of this query will be a list of user names (u.name) along with their corresponding order dates (o.order_date) for users aged over 25, sorted by order date in descending order.
 
 ## Complex SQL Query Example 2: Aggregation
 
@@ -47,6 +49,5 @@ HAVING AVG(o.total_amount) > 100;
 - Within each group, it calculates the average (`AVG`) of the `total_amount` column from the `orders` table and aliases it as `avg_order_amount`.
 - The `HAVING` clause filters the groups to include only those where the average order amount is greater than 100.
 
-
-## Execution
-
+**Results:**
+- The result of this query will be a list of user names along with their corresponding average order amounts, but only for users whose average order amount exceeds 100.
