@@ -1,5 +1,4 @@
 use rusqlite::{Connection, Result, ToSql};
-use std::convert::TryFrom;
 
 pub struct Database {
     conn: Connection,
@@ -45,7 +44,7 @@ impl Database {
     pub fn update_user(&self, id: i64, new_email: &str) -> Result<()> {
         self.conn.execute(
             "UPDATE users SET email = ?1 WHERE id = ?2",
-            &[new_email as &dyn ToSql, &id],
+            &[&new_email as &dyn ToSql, &id],
         )?;
         Ok(())
     }
