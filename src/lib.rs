@@ -18,13 +18,14 @@ impl Database {
         Ok(Database { conn })
     }
 
-    pub fn insert_user(&self, name: &str, email: &str) -> Result<()> {
-        self.conn.execute(
-            "INSERT INTO users (name, email) VALUES (?1, ?2)",
-            &[name, email]
-        )?;
-        Ok(())
+    pub fn update_user(&self, id: i64, new_email: &str) -> Result<()> {
+    self.conn.execute(
+        "UPDATE users SET email = ?1 WHERE id = ?2",
+        vec![new_email, &id]
+    )?;
+    Ok(())
     }
+
 
     pub fn get_users(&self) -> Result<Vec<(i64, String, String)>> {
         let mut stmt = self.conn.prepare("SELECT id, name, email FROM users")?;
