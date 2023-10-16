@@ -26,7 +26,7 @@ impl Database {
         Ok(())
     }
 
-    pub fn get_users(&self) -> Result<Vec<(i64, String, String)> {
+    pub fn get_users(&self) -> Result<Vec<(i64, String, String)>> {
         let mut stmt = self.conn.prepare("SELECT id, name, email FROM users")?;
         let user_iter = stmt.query_map([], |row| Ok((row.get(0)?, row.get(1)?, row.get(2)?)))?;
 
