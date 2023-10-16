@@ -1,53 +1,63 @@
-# SQLite Database Operations
 
-This Python script demonstrates basic database operations using SQLite. SQLite is a lightweight and self-contained database engine, and this script shows you how to create a database, create a table, insert data, read data, and execute custom SQL queries.
 
-## Code Explanation
+```markdown
+# My Project
 
-### Database Creation
+This Rust project is named "my_project." It includes the following files and code functions:
 
-Create a SQLite database named `test.db`. 
+## 1. rust.yml
 
-```python
-create_table()
+The `rust.yml` file is a GitHub Actions workflow configuration file. It sets up a GitHub Actions workflow named "Clippy" that is triggered on pushes to the main branch and pull requests. The workflow runs on an Ubuntu latest runner and performs the following steps:
+- Checks out the code repository.
+- Configures the Rust toolchain with Clippy and Rustfmt components.
+- Formats the code using `make format`.
+- Lints the code using `make lint`.
+- Runs tests using `make test`.
+
+This workflow ensures that code formatting and linting are enforced, and tests are run automatically when changes are pushed to the main branch or in pull requests.
+
+## 2. src Folder and Files
+
+The `src` folder contains the source code for the Rust project. It typically includes the following files:
+- `lib.rs`: This file often contains library code and data structures.
+- `main.rs`: This file typically includes the entry point for the application, setting up the project, and running the program.
+
+You can add your project-specific code to these files to build your Rust application.
+
+## 3. Cargo.toml
+
+The `Cargo.toml` file is the project configuration file for Rust. It defines project metadata and dependencies. Here's a sample `Cargo.toml` for "my_project":
+```toml
+[package]
+name = "my_project"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rusqlite = "0.25"
+thiserror = "1.0"
+
+[lib]
+name = "my_project"
+path = "src/lib.rs"
+
+[[bin]]
+name = "my_project"
+path = "src/main.rs"
 ```
 
-## Joining Tables
+This `Cargo.toml` specifies project metadata, dependencies, and binary/library configurations.
 
-```sql
-SELECT u.name, o.order_date
-FROM users u
-INNER JOIN orders o ON u.id = o.user_id
-WHERE u.age > 25
-ORDER BY o.order_date DESC;
+## 4. Makefile
+
+The `Makefile` is used for simplifying and automating common development tasks. In your project, the Makefile includes the following targets:
+- `format`: Formats the code using `cargo fmt --quiet`.
+- `lint`: Lints the code using `cargo clippy --quiet`.
+- `test`: Runs tests using `cargo test --quiet`.
+- `run`: Runs the project using `cargo run`.
+- `run-release`: Runs the project in release mode using `cargo run --release --bin my_binary`.
+- `all`: A convenience target that runs `format`, `lint`, `test`, and `run` in that order.
+
+These Makefile targets allow you to easily format, lint, test, and run your Rust project by running `make` commands in your terminal.
+
 ```
-
-**Explanation:**
-
-- This query retrieves data from two tables: `users` (aliased as `u`) and `orders` (aliased as `o`).
-- It performs an inner join between the two tables based on the `user_id` in the `orders` table matching the `id` in the `users` table.
-- The `WHERE` clause filters the results to include only users with an age greater than 25.
-- Finally, the `ORDER BY` clause sorts the results by the `order_date` column in descending order.
-
-**Results:**
-- The result of this query will be a list of user names (u.name) along with their corresponding order dates (o.order_date) for users aged over 25, sorted by order date in descending order.
-
-## Complex SQL Query Example 2: Aggregation
-
-```sql
-SELECT u.name, AVG(o.total_amount) AS avg_order_amount
-FROM users u
-INNER JOIN orders o ON u.id = o.user_id
-GROUP BY u.name
-HAVING AVG(o.total_amount) > 100;
-```
-
-**Explanation:**
-
-- This query also retrieves data from the `users` and `orders` tables, performing an inner join.
-- It uses the `GROUP BY` clause to group the results by the user's name (`u.name`).
-- Within each group, it calculates the average (`AVG`) of the `total_amount` column from the `orders` table and aliases it as `avg_order_amount`.
-- The `HAVING` clause filters the groups to include only those where the average order amount is greater than 100.
-
-**Results:**
-- The result of this query will be a list of user names along with their corresponding average order amounts, but only for users whose average order amount exceeds 100.
