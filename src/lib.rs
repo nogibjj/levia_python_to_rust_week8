@@ -1,51 +1,34 @@
-use rusqlite::{Connection, Result, ToSql};
+// lib.rs
+
+use rusqlite::{Connection, Result};
+use thiserror::Error;
+
+#[derive(Error, Debug)]
+enum MyError {
+    #[error(transparent)]
+    Sqlite(#[from] rusqlite::Error),
+}
 
 pub struct Database {
-    conn: Connection,
+    connection: Connection,
 }
 
 impl Database {
-    pub fn new(db_file: &str) -> Result<Database> {
-        let conn = Connection::open(db_file)?;
-        conn.execute(
-            "CREATE TABLE IF NOT EXISTS users (
-                id INTEGER PRIMARY KEY,
-                name TEXT,
-                email TEXT
-            )",
-            [],
-        )?;
-        Ok(Database { conn })
+    pub fn new() -> Result<Self> {
+        let connection = Connection::open("my_database.db")?;
+        Ok(Database { connection })
     }
 
-    pub fn insert_user(&self, name: &str, email: &str) -> Result<()> {
-        self.conn.execute(
-            "INSERT INTO users (name, email) VALUES (?1, ?2)",
-            &[name, email],
-        )?;
-        Ok(())
-    }
+    pub fn get_all_data(&self) -> Result<Vec<String>> {
+        let mut stmt = self.connection.prepare("SELECT * FROM my_table")?;
+        let data_iter = stmt.query_map([], |row| row.get(0))?;
 
-    pub fn get_users(&self) -> Result<Vec<(i64, String, String)>>
-    {
-        let mut stmt = self.conn.prepare("SELECT id, name, email FROM users")?;
-        let user_iter = stmt.query_map([], |row| {
-            Ok((
-                row.get(0)?,
-                row.get(1)?,
-                row.get(2)?,
-            ))
-        })?;
+        let mut result = Vec::new();
+        for data in data_iter {
+            result.push(data?);
+        }
 
-        let users: rusqlite::Result<Vec<(i64, String, String)>> = user_iter.collect();
-        Ok(users?)
-    }
-
-    pub fn update_user(&self, id: i64, new_email: &str) -> Result<()> {
-        self.conn.execute(
-            "UPDATE users SET email = ?1 WHERE id = ?2",
-            &[&new_email as &dyn ToSql, &id],
-        )?;
-        Ok(())
+        Ok(result)
     }
 }
+
