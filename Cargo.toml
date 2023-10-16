@@ -7,5 +7,5 @@ edition = "2021"
 rusqlite = "0.25.0"
 
 [lib]
-name = ""
+name = "my_project"
 path = "src/lib.rs"
