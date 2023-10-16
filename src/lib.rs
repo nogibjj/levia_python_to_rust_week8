@@ -1,4 +1,4 @@
-use rusqlite::{Connection, Result, NO_PARAMS};
+use rusqlite::{Connection, Result};
 
 pub struct Database {
     conn: Connection,
@@ -13,7 +13,7 @@ impl Database {
                 name TEXT,
                 email TEXT
             )",
-            NO_PARAMS,
+            [] 
         )?;
         Ok(Database { conn })
     }
@@ -21,16 +21,14 @@ impl Database {
     pub fn insert_user(&self, name: &str, email: &str) -> Result<()> {
         self.conn.execute(
             "INSERT INTO users (name, email) VALUES (?1, ?2)",
-            &[name, email],
+            &[name, email]
         )?;
         Ok(())
     }
 
-    pub fn get_users(&self) -> Result<Vec<(i64, String, String)>> {
+    pub fn get_users(&self) -> Result<Vec<(i64, String, String)> {
         let mut stmt = self.conn.prepare("SELECT id, name, email FROM users")?;
-        let user_iter = stmt.query_map(NO_PARAMS, |row| {
-            Ok((row.get(0)?, row.get(1)?, row.get(2)?))
-        })?;
+        let user_iter = stmt.query_map([], |row| Ok((row.get(0)?, row.get(1)?, row.get(2)?)))?;
 
         let mut users = Vec::new();
         for user in user_iter {
@@ -42,7 +40,7 @@ impl Database {
     pub fn update_user(&self, id: i64, new_email: &str) -> Result<()> {
         self.conn.execute(
             "UPDATE users SET email = ?1 WHERE id = ?2",
-            &[new_email, &id],
+            &[new_email, &id] // Ensure both new_email and id have the expected types
         )?;
         Ok(())
     }
