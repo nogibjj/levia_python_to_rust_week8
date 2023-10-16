@@ -1,16 +1,16 @@
-install:
-	pip install --upgrade pip &&\
-		pip install -r requirements.txt
+format:
+	cargo fmt --quiet
 
 lint:
-	pylint --disable=R,C --ignore-patterns=test_.*?py *.py
-
-format:	
-	black *.py 
+	cargo clippy --quiet
 
 test:
-	python -m pytest -vv --cov=main test_*.py
-deploy:
+	cargo test --quiet
 
-		
-all: install lint format test 
+run:
+	cargo run 
+
+run-release:
+	cargo run --release --bin my_binary
+
+all: format lint test run
