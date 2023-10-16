@@ -1,8 +1,11 @@
 [package]
 name = "my_project"
 version = "0.1.0"
-edition = "2018"
+edition = "2021"
 
 [dependencies]
 rusqlite = "0.25.0"
 
+[lib]
+name = ""
+path = "src/lib.rs"
