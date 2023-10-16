@@ -18,12 +18,14 @@ impl Database {
         Ok(Database { conn })
     }
 
-    pub fn update_user(&self, id: i64, new_email: &str) -> Result<()> {
-    self.conn.execute(
-        "UPDATE users SET email = ?1 WHERE id = ?2",
-        vec![new_email, &id]
-    )?;
-    Ok(())
+    
+
+    pub fn insert_user(&self, name: &str, email: &str) -> Result<()> {
+        self.conn.execute(
+            "INSERT INTO users (name, email) VALUES (?1, ?2)",
+            &[name, email]
+        )?;
+        Ok(())
     }
 
 
@@ -41,7 +43,7 @@ impl Database {
     pub fn update_user(&self, id: i64, new_email: &str) -> Result<()> {
         self.conn.execute(
             "UPDATE users SET email = ?1 WHERE id = ?2",
-            &[new_email, &id]
+            vec![new_email, &id]
         )?;
         Ok(())
     }
