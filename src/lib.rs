@@ -40,7 +40,7 @@ impl Database {
     pub fn update_user(&self, id: i64, new_email: &str) -> Result<()> {
         self.conn.execute(
             "UPDATE users SET email = ?1 WHERE id = ?2",
-            &[new_email, &id] // Ensure both new_email and id have the expected types
+            &[new_email, &id]
         )?;
         Ok(())
     }
