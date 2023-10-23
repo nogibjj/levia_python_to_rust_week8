@@ -1,5 +1,3 @@
-// lib.rs
-
 use rusqlite::{Connection, Result};
 use thiserror::Error;
 
