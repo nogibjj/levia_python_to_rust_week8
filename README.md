@@ -40,7 +40,7 @@ It's important to note that the performance difference becomes more apparent in 
 
 In summary, this README highlights the functionality in Rust, demonstrates its improvements, and provides a general overview of the performance differences between the Rust and Python implementations. The choice between Rust and Python depends on the project's specific needs, with Rust offering superior performance and safety in many cases.
 
-## `Cargo.toml`
+## Cargo.toml
 
 The `Cargo.toml` file is the project configuration file for Rust. It defines project metadata and dependencies. Here's a sample `Cargo.toml` for "my_project":
 
@@ -65,7 +65,7 @@ path = "src/main.rs"
 
 This `Cargo.toml` specifies project metadata, dependencies, and binary/library configurations.
 
-## `Makefile`
+## Makefile
 
 The `Makefile` is used to simplify and automate common development tasks. In your project, the Makefile includes the following targets:
 
